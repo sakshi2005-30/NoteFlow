@@ -6,12 +6,17 @@ import Navbar from "./components/Navbar";
 import Register from "./components/Register"
 const App = () => {
   const [user,setUser]=useState(null);
-  useEffect(()=>{
-    const storedUser=localStorage.getItem("user");
-    if(storedUser){
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const storedUser = localStorage.getItem("user");
+
+    if (token && storedUser) {
       setUser(JSON.parse(storedUser));
+    } else {
+      setUser(null);
     }
-  },[])
+  }, []);
+
   const handleLogout=()=>{
     localStorage.removeItem("token");
     localStorage.removeItem("user");

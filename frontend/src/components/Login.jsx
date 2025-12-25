@@ -20,8 +20,8 @@ function Login({setUser}) {
             const {token,data}=response.data;
 
             localStorage.setItem("token",token);
-            localStorage.setItem("user",JSON.stringify(data))
-            setUser(data);
+            localStorage.setItem("user",JSON.stringify(data.data))
+            setUser(data.data);
             navigate('/');
         }
 

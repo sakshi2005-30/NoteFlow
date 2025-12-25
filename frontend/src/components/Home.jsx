@@ -4,7 +4,7 @@ import NoteModal from "./NoteModal";
 import { useLocation } from "react-router-dom";
 
 const Home = () => {
-  const [notes, setNotes] = useState([]); // always array
+  const [notes, setNotes] = useState([]); 
   const [error, setError] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editNote, setEditNote] = useState(null);

@@ -7,6 +7,7 @@ const Navbar = ({user,handleLogout}) => {
     if(!user){
       return;
     }
+    if(search==="")return;
     const delay=setTimeout(()=>{
       navigate(search.trim()?`/?search=${encodeURIComponent(search)}`:"/");
     },500)
