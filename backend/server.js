@@ -16,8 +16,9 @@ if (process.env.NODE_ENV === "production") {
     );
   });
 }
+//connecting to db
 
-connectToDB()
+connectToDB();
 app.use(express.json());
 
 app.use("/api/auth",authRoutes);
