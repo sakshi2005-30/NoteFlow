@@ -44,7 +44,7 @@ const getSingleNote=async(req,res)=>{
     const noteId=req.params.id;
     try{
         if(!noteId){
-            return res.statuse(400).json({
+            return res.status(400).json({
                 message:"Note not present Id is wrong"
             })
            
@@ -67,7 +67,12 @@ const getSingleNote=async(req,res)=>{
 const updateNote=async(req,res)=>{
     try{
         const noteId=req.params.id;
-        const note=await Note.findByIdAndUpdate(noteId,req.body,{new:true});
+        const note = await Note.findOneAndUpdate(
+          { _id: noteId, createdBy: req.user._id },
+          req.body,
+          { new: true }
+        );
+
         if(!note){
             return res.status(400).json({
                 message:"Note not present"
@@ -90,7 +95,10 @@ const updateNote=async(req,res)=>{
 //delete a note
 const deleteNote=async(req,res)=>{
     try{
-        const note=await Note.findByIdAndDelete(req.params.id);
+        const note = await Note.findOneAndDelete({
+          _id: req.params.id,
+          createdBy: req.user._id,
+        });
         if(!note){
             return res.status(400).json({
                 message:"Note not found"
