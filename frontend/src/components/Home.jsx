@@ -3,7 +3,7 @@ import axios from "axios";
 import NoteModal from "./NoteModal";
 import { useLocation } from "react-router-dom";
 
-const Home = () => {
+const Home = ({user}) => {
   const [notes, setNotes] = useState([]); 
   const [error, setError] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,7 +18,7 @@ const Home = () => {
 
       if (!token) {
         setError("Please login again");
-        setNotes([]);
+        
         return;
       }
 
@@ -52,6 +52,9 @@ const Home = () => {
   };
 
   useEffect(() => {
+    if(!user){
+      return ;
+    }
     fetchNotes();
   }, [location.search]);
 

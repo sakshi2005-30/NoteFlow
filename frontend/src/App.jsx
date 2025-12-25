@@ -7,15 +7,15 @@ import Register from "./components/Register"
 const App = () => {
   const [user,setUser]=useState(null);
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const storedUser = localStorage.getItem("user");
+  const token = localStorage.getItem("token");
+  const storedUser = localStorage.getItem("user");
 
-    if (token && storedUser) {
-      setUser(JSON.parse(storedUser));
-    } else {
-      setUser(null);
-    }
-  }, []);
+  if (token && storedUser) {
+    setUser(JSON.parse(storedUser));
+  } else {
+    setUser(null);
+  }
+}, []);
 
   const handleLogout=()=>{
     localStorage.removeItem("token");
@@ -31,7 +31,7 @@ const App = () => {
         <Route path="/login"  element={user?<Navigate to="/" />:<Login setUser={setUser}/>}/>
 
         <Route path="/register" element={user?<Home/>:<Register setUser={setUser}/>}/>
-        <Route path="/" element={user?<Home/>:<Navigate to="/login"/>}/>
+        <Route path="/" element={user?<Home user={user}/>:<Navigate to="/login"/>}/>
       </Routes>
     </div>
   )
