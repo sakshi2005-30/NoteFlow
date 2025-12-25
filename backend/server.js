@@ -7,7 +7,7 @@ const notesRoutes=require("./routes/notes")
 const path=require("path")
 
 
-iif (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "production") {
   app.use(
     express.static(
       path.join(__dirname, "..", "frontend", "dist")
