@@ -11,7 +11,7 @@ const Home = () => {
 
   const location = useLocation();
 
-  // ================= FETCH NOTES =================
+  
   const fetchNotes = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -31,7 +31,7 @@ const Home = () => {
         },
       });
 
-      // 🔐 ALWAYS normalize backend response
+      
       const notesArray = Array.isArray(response.data) ? response.data : [];
 
       const filteredNotes = search
@@ -47,7 +47,7 @@ const Home = () => {
     } catch (err) {
       console.error("Fetch notes error:", err);
       setError("Failed to fetch notes");
-      setNotes([]); // prevent crash
+      setNotes([]); 
     }
   };
 
@@ -55,7 +55,7 @@ const Home = () => {
     fetchNotes();
   }, [location.search]);
 
-  // ================= DELETE NOTE =================
+  
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("token");
@@ -71,7 +71,7 @@ const Home = () => {
         },
       });
 
-      // 🔐 safe state update
+     
       setNotes((prev) => prev.filter((note) => note._id !== id));
     } catch (err) {
       console.error("Delete error:", err);
@@ -79,7 +79,7 @@ const Home = () => {
     }
   };
 
-  // ================= MODAL CONTROLS =================
+ 
   const openModal = () => {
     setEditNote(null);
     setIsModalOpen(true);
@@ -90,12 +90,12 @@ const Home = () => {
     setEditNote(null);
   };
 
-  // ================= UI =================
+  
   return (
     <div className="relative min-h-screen">
       {error && <p className="text-red-600 text-center mt-6">{error}</p>}
 
-      {/* Floating Add Button */}
+    
       <button
         onClick={openModal}
         className="fixed bottom-10 right-10 h-14 w-14 bg-gray-800 rounded-full hover:bg-gray-900 flex justify-center items-center"
@@ -103,7 +103,7 @@ const Home = () => {
         <span className="text-3xl font-medium pb-1">+</span>
       </button>
 
-      {/* Modal */}
+   
       {isModalOpen && (
         <NoteModal
           onClose={closeModal}
@@ -123,7 +123,7 @@ const Home = () => {
         />
       )}
 
-      {/* Notes Grid */}
+    
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {Array.isArray(notes) &&
           notes.map((note) => (

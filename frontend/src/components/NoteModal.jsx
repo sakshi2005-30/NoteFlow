@@ -13,7 +13,7 @@ const NoteModal = ({onClose,onSave,editNote,onEditSave}) => {
             },{
                 headers:{Authorization:`Bearer ${token}`}
             })
-            onEditSave(newNote)
+            onEditSave(newNote.data.data)
         }
         else{
             const newNote = await axios.post(
@@ -26,7 +26,7 @@ const NoteModal = ({onClose,onSave,editNote,onEditSave}) => {
                 headers: { Authorization: `Bearer ${token}` },
               }
             );
-              onSave(newNote);
+              onSave(newNote.data.data);
         }
         
       
